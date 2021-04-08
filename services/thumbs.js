@@ -1,34 +1,41 @@
-const LikeDislike = require("../models/thumbs");
+const Thumbs = require("../models/thumbs");
 const Users = require("../models/users");
 
-module.exports = class LikeDislikeService {
+module.exports = class ThumbsService {
   async createLike(like) {
-    console.log(like)
-    const user = await LikeDislike.query()
-    // console.log(user);
-    if (user == undefined) return await LikeDislike.query().insertGraph();
+    const user = await Thumbs.query().where("user_id",like.user_id).where("blog_id",like.blog_id);
+    if(user.length==0){
+      return await Thumbs.query().insertGraph(like).where("user_id",like.user_id).where("blog_id",like.blog_id)
+    }else{
+      return await Thumbs.query()
+      .patch({
+        "like": 1
+      }).where("user_id",like.user_id).where("blog_id",like.blog_id);
+
+    }
   }
 
   async createDislike(dislike) {
-    const user = await LikeDislike.query().where("user_id","==",like.user_id).where("blog_id","==","like.blog_id");
-    if (user == undefined) return await LikeDislike.query().insertGraph(like);
-
+    // console.log(dislike);
+    const user = await Thumbs.query().where("user_id",dislike.user_id).where("blog_id",dislike.blog_id);
+    // console.log(user);
+    if(user.length==0){
+      return await Thumbs.query().insertGraph(dislike).where("user_id",dislike.user_id).where("blog_id",dislike.blog_id)
+    }else{
+      return await Thumbs.query()
+      .patch({
+        "dislike": 0
+      }).where("user_id",dislike.user_id).where("blog_id",dislike.blog_id);
+    }
   }
 
   async findAllLikes(like) {
-    // return await LikeDislike.query(like).where({like: "true"});
-    const likes = await LikeDislike.query()
-      .where("like", 1)
-      // .withGraphFetched("users");
-    // console.log(likes, likes[0].users.password, "service likes")
-      return likes;
+    const likes = await Thumbs.query().withGraphFetched('blogs').where("like", 1);
+    return likes;
   }
 
   async findAllDislikes(dislike) {
-    // return await LikeDislike.query(dislike).where({ dislike: "true" });
-    const dislikes = await LikeDislike.query()
-    .where("dislike", 1)
-    // .withGraphFetched("users");
+    const dislikes = await Thumbs.query().where("dislike", 0).where("like",null)
     return dislikes;
   }
 };

@@ -19,14 +19,14 @@ class Blogs extends (Model) {
         }
     }
     static get relationMappings() {
-        const Users = require('./users');
+        const Thumbs = require('./thumbs');
         return {
-          users: {
+          thumbs: {
             relation: Model.BelongsToOneRelation,
-            modelClass: Users,
+            modelClass: Thumbs,
             join: {
-              from: 'blogs.user_id',
-              to: 'users.id',
+              from: 'blogs.id',
+              to: 'thumbs.blog_id',
             },
           },
         };

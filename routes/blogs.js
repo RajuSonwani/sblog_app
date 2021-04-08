@@ -3,10 +3,11 @@ const router = express.Router();
 const BlogService = require('../services/blogs');
 const Services = new BlogService();
 
-const { authenticateToken } = require('../auth/strategies/jwt');
+const { authenticateToken } = require('../auth/jwt');
 
 // create blog
 router.post('/createBlog', authenticateToken, async(req, res) => {
+    req.body.user_id = req.decode.id;
     await Services.createBlog(req.body).then((data) => {
         console.log(data, "data");
         res.send(data);

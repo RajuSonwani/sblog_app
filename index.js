@@ -1,20 +1,20 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-const cors =require("cors");
+// const cors =require("cors");
 
 const homeRouter = require('./routes/home');
 const userRouter = require('./routes/users');
 const blogRouter = require('./routes/blogs');
-const likeDislikeRouter = require('./routes/thumbs');
+const thumbsRouter = require('./routes/thumbs');
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(cors);
+// app.use(cors);
 app.use(userRouter);
 app.use(blogRouter);
-app.use(likeDislikeRouter);
+app.use(thumbsRouter);
 app.use(homeRouter);
 
 

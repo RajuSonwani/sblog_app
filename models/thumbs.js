@@ -2,7 +2,7 @@ const { Model } = require('objection');
 const knex = require('../config/dbConfig');
 Model.knex(knex);
 
-class LikeDislike extends (Model) {
+class Thumbs extends (Model) {
     static get tableName() {
         return 'thumbs'
     }
@@ -24,7 +24,7 @@ class LikeDislike extends (Model) {
         const Blogs = require('./blogs')
         return {
             blogs: {
-                relation: Model.BelongsToOneRelation,
+                relation: Model.HasManyRelation,
                 modelClass: Blogs,
                 join: {
                     from: 'thumbs.blog_id',
@@ -56,4 +56,4 @@ class LikeDislike extends (Model) {
 //   }
   
 
-module.exports = LikeDislike;
+module.exports = Thumbs;

@@ -1,43 +1,50 @@
-POST http://localhost:2050/signup
+POST http://localhost:2050/login
 Content-Type: application/json
+# "name":"Raju Sonwani",
 
 {
-    "name":"Abc",
-    "email":"abcd@gmail.com",
+    "email":"raju@gmail.com",
     "password":"0000"
 }
 
 #######
-GET http://localhost:2050/getAll
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJhanUgU29ud2FuaSIsImVtYWlsIjoicmFqdUBnbWFpbC5jb20iLCJpYXQiOjE2MTY1OTQ2NjgsImV4cCI6MTYxNjYwMTg2OH0.lV8S2v-N0gBYefqTew5rxX90F6QnDZ-GFoUZGXtPnhM
+POST http://localhost:2050/createBlog
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJhanUgU29ud2FuaSIsImVtYWlsIjoicmFqdUBnbWFpbC5jb20iLCJpYXQiOjE2MTY1OTQ2NjgsImV4cCI6MTYxNjYwMTg2OH0.lV8S2v-N0gBYefqTew5rxX90F6QnDZ-GFoUZGXtPnhM
 
 {
-
-    "title":"Post1",
-    "description":"Hello friends",
-    "user_id":2
-        
-
+    "title":"Post2",
+    "description":"Hello World!"
 }
 
 #########
-PUT http://localhost:2050/like
+POST http://localhost:2050/like
 Content-Type: application/json
-Authorization: Bearer accessKeyeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJhanUgU29ud2FuaSIsImVtYWlsIjoicmFqdUBnbWFpbC5jb20iLCJpYXQiOjE2MTY1ODEwNTYsImV4cCI6MTYxNjU4ODI1Nn0.CHEDpQfKJVhBb13jxxR-fozKVouwD-5xhhcKHO4VRis
 
 {
     "like":1,
+    "blog_id":2
+}
+
+########
+POST http://localhost:2050/dislike
+Content-Type: application/json
+
+{
+    "dislike":0,
     "blog_id":1
 }
 
-
-
 #####
+
 GET http://localhost:2050/logout
 
 #####
-GET http://localhost:2050/likes
+GET http://localhost:2050/dislikes
 
 #####
 GET http://localhost:2050/getAll
 # Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlJhanUgU29ud2FuaSIsImVtYWlsIjoicmFqdUBnbWFpbC5jb20iLCJpYXQiOjE2MTY1OTc2MTYsImV4cCI6MTYxNjYwNDgxNn0.Q1hEI_wM8V_nFeTDIJRMq-cOOQrjprxbHcLk_vKvuVw
+
+####
+GET http://localhost:2050/

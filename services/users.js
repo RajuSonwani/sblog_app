@@ -28,7 +28,7 @@ module.exports = class UserService {
 
     async findById(userId) {
         const id = await Users.query().findById(userId);
-        console.log(id, "ser id");
+        // console.log(id, "ser id");
         return id;
     }
 

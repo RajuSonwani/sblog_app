@@ -2,8 +2,11 @@ var express = require('express');
 var router = express.Router();
 const UserService = require('../services/users');
 const Services = new UserService();
+// const Users = require('../models/users');
+const knex = require('../config/dbConfig');
 
-const { generateAccessToken } = require('../auth/strategies/jwt');
+
+const { generateAccessToken } = require('../auth/jwt');
 
 // create users account
 router.post('/signup', async(req, res) => {
@@ -52,5 +55,6 @@ router.get('/user/:id', async(req, res) => {
 router.get("/logout",(req,res)=>{
     res.clearCookie('key').send("cookie cleared!")
 })
+
 
 module.exports = router;
